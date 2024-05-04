@@ -1,0 +1,19 @@
+server:
+  tomcat:
+    max-threads: 15
+
+
+spring:
+  cloud:
+    function:
+      definition: consumeOrder
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+      bindings:
+        produceOrder-out-0:
+          destination: ordertopic
+        consumeOrder-in-0:
+          destination: ordertopic
+          group: consumeOrderGroup
