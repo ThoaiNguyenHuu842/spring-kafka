@@ -13,6 +13,6 @@ public class Application {
 
 	@Bean
 	public Consumer<String> consumeOrder() {
-		return name -> System.out.println("Hello1, " + name + "," + System.currentTimeMillis());
+		return (name) -> System.out.println("Hello1, " + name + "," + System.currentTimeMillis());
 	}
 }
