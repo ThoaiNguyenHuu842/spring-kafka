@@ -1,19 +1,15 @@
 package com.thoainguyen.rest;
 
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
+@Data
+@Builder
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class Order implements Serializable {
-  private String field;
-
-  public Order(String field) {
-    this.field = field;
-  }
-
-  public String getField() {
-    return field;
-  }
-
-  public void setField(String field) {
-    this.field = field;
-  }
+  private Integer id;
 }

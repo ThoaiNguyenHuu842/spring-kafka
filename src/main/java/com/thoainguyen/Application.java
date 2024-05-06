@@ -1,5 +1,6 @@
 package com.thoainguyen;
 
+import com.thoainguyen.rest.Order;
 import java.util.function.Consumer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,7 +13,7 @@ public class Application {
 	}
 
 	@Bean
-	public Consumer<String> consumeOrder() {
-		return (name) -> System.out.println("Hello1, " + name + "," + System.currentTimeMillis());
+	public Consumer<Order> consumeOrder() {
+		return (order) -> System.out.println("Consuming order:, " + order + "," + System.currentTimeMillis());
 	}
 }

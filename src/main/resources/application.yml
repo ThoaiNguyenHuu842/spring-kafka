@@ -18,16 +18,16 @@ spring:
               configuration:
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: org.springframework.kafka.support.serializer.JsonSerializer
-            consumeOrder-in-0:
-              consumer:
-                configuration:
-                  key.serializer: org.apache.kafka.common.serialization.StringSerializer
-                  value.serializer: org.springframework.kafka.support.serializer.JsonSerializer
+          consumeOrder-in-0:
+            consumer:
+              configuration:
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                value.serializer: org.springframework.kafka.support.serializer.JsonSerializer
       bindings:
         produceOrder-out-0:
-          destination: ordertopicthoai
+          destination: ordertopic
           producer:
             use-native-encoding: true
         consumeOrder-in-0:
-          destination: ordertopicthoai
+          destination: ordertopic
           group: consumeOrderGroup
