@@ -39,7 +39,8 @@ services:
       # blocks until kafka is reachable
 
       echo -e 'Creating kafka topics'
-      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic ordertopic --replication-factor 1 --partitions 2
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic orderCreatedTopic --replication-factor 1 --partitions 2
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic orderProcessedTopic --replication-factor 1 --partitions 2
 
       echo -e 'Created kafka topics:'
       kafka-topics --bootstrap-server kafka:29092 --list

@@ -12,4 +12,5 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 public class Order implements Serializable {
   private Integer id;
+  private Integer customerId;
 }
