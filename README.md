@@ -1,12 +1,9 @@
 # Introduction
 
 This project aims to demonstrate how Kafka works with Spring Cloud Stream in distributed systems. 
-This project simulates an Order Management system containing an Order Producer Service and an Order Consumer Service.
-Each service can be scaled up horizontally by adding more instance.
-
-The system contains three services: **Checkout Service**, **Order Service** and **Fulfillment Service** communicating 
-via two Kafka topics: **OrderCreated** and **OrderProcessed**. The order process is triggered via a REST API 
-sent from the client side to Checkout Service as below.
+This project simulates an Order Management system containing contains three services: **Checkout Service**, **Order Service** and **Fulfillment Service** communicating 
+via two Kafka topics: **OrderCreated** and **OrderProcessed**. Each service can be scaled up horizontally by adding more instance. 
+The order process is triggered via a REST API sent from the client side to Checkout Service as below.
 
 ![img.png](img.png)
 
