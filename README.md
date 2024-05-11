@@ -2,37 +2,39 @@
 
 This project aims to demonstrate how Kafka works with Spring Cloud Stream in distributed systems. 
 This project simulates an Order Management system containing an Order Producer Service and an Order Consumer Service.
-In production, each service can be scaled up horizontally by adding more instance. 
+Each service can be scaled up horizontally by adding more instance.
 
-Order Service instances consume Kafka message with the same consumer group to
+The system contains three services: **Checkout Service**, **Order Service** and **Fulfillment Service** communicating 
+via two Kafka topics: **OrderCreated** and **OrderProcessed**. The order process is triggered via a REST API 
+sent from the client side to Checkout Service as below.
+
+![img.png](img.png)
+
+When a new order is placed, we produce a message to Kafka with the order details and use the 
+customer ID as the message key to ensures that all events related to the same customer (based on customer ID) 
+are processed sequentially by assigning them to the same partition. We will create  **OrderCreated** and **OrderProcessed**
+topic with two partitions to demo how this mechanism works.
+
+
 
 ## Tech stack
 
-JDK 11, Gradle, Spring boot, Spring Feign, Resilience4j, Wiremock
-
-We will use Spring Feign to make RESTful requests to the KYC service and enable bulkhead to the **VerificationService**. The source
-code is really straightforward, the **VerificationServiceClient** makes request to the KYC API which is consumed by the
-**VerificationUserService** in order to return the verification result to customers via **VerificationUserEndpoint**.
-
-Bulkhead is applied to the **VerificationService* via the below configurations:
-```shell
-resilience4j.bulkhead:
-  instances:
-    verificationUserService:
-      maxConcurrentCalls: 5
-      maxWaitDuration: 2000ms
-```
-We will write an integration test (**VerificationServiceTest**) to verify how Bulkhead works by a few scenarios.
+JDK 11, Gradle, Spring boot, Spring Cloud Stream, Kafka, Docker Compose
 
 ## How to get started?
+We need to build up Kafka with a Zookeeper, a broker and two topics using docker-compose:
+```shell
+docker-compose up
+```
+
 We can start this project via below gradle commands:
 ```shell
 gradle build
 gradle bootRun
 ```
-To run the integration test
+CURL to check out an order
 ```shell
-gradle build
-gradle test
+curl --location --request POST 'localhost:8080/app/order/999?customerId=9'
 ```
-
+We can also access to kafka ui via http://localhost:8088 which was created by docker-compose to obverse 
+created messages, and the topic partition assigned to them.
